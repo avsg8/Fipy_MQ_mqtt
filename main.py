@@ -36,7 +36,7 @@ def pubmsg(server="localhost", topic='saltlevel', payload=0):
 
 wlan = WLAN(mode=WLAN.STA, antenna=WLAN.EXT_ANT, max_tx_pwr=78)
 
-wlan.connect(ssid='PINK', auth=(WLAN.WPA2, 'enidblyton'))
+wlan.connect(ssid='1234', auth=(WLAN.WPA2, 'xxxxxxxx'))
 print('trying to connect to wifi')
 for k in range(10):
     if wlan.isconnected():
