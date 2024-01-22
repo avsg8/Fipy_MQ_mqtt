@@ -55,7 +55,7 @@ class BaseMQ(object):
         self._lastMesurement = utime.ticks_ms()
         self._rsCache = None
         self.dataIsReliable = False
-        self.pinData = ADC().channel(pin=pinData, attn = ADC.ATTN_11DB) #ADC(pinData)
+        self.pinData = ADC().channel(pin=pinData, attn = ADC.ATTN_11DB) #ADC(pinData) #changed here. ATTN_11DB added
         self.measuringStrategy = measuringStrategy
         self._boardResistance = boardResistance
         if pinHeater != -1:
