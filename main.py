@@ -1,4 +1,6 @@
 # main.py -- put your code here!
+# Author: avsg8. 01/20/2024
+
 from network import WLAN, LTE, LoRa, Bluetooth, Server
 import machine, pycom, socket, ssl, uos, time
 from umqtt.simple2 import MQTTClient
