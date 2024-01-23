@@ -1,4 +1,10 @@
 # Test for MQ-series drivers
+# --------------------------------------------------
+# Edited to run on PyCom devices
+# Author: avsg8, (https://github.com/avsg8), 01/2024
+
+from BaseMQ import BaseMQ 
+from micropython import const
 
 from MQ7 import MQ7
 import utime
