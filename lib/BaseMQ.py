@@ -1,6 +1,12 @@
 #include "BaseMQ.h"
 ## Ported from https://github.com/amperka/TroykaMQ
 ## Author: Alexey Tveritinov [kartun@yandex.ru]
+# --------------------------------------------------
+# Edited to run on PyCom devices
+# Author: avsg8, (https://github.com/avsg8), 01/2024
+
+from BaseMQ import BaseMQ 
+from micropython import const
 
 from machine import Pin, ADC
 from micropython import const
