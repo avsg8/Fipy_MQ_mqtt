@@ -1,6 +1,9 @@
 # main.py -- put your code here!
-# Author: avsg8. 
-# Date: 01/20/2024
+# --------------------------------------------------
+# Author: avsg8, (https://github.com/avsg8), 01/2024
+
+from BaseMQ import BaseMQ 
+from micropython import const
 
 from network import WLAN, LTE, LoRa, Bluetooth, Server
 import machine, pycom, socket, ssl, uos, time
