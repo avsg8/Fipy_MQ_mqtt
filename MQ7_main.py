@@ -1,4 +1,5 @@
 # Test for MQ-series drivers
+# Ported from https://github.com/kartun83/micropython-MQ
 # --------------------------------------------------
 # Edited to run on PyCom devices
 # Author: avsg8, (https://github.com/avsg8), 01/2024
