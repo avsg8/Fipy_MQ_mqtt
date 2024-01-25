@@ -1,0 +1,55 @@
+[
+    {
+        "id": "09b9829cb66f1087",
+        "type": "mqtt in",
+        "z": "65df082999074b71",
+        "name": "",
+        "topic": "COlevels",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "9ab17499a5d5790e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "6fc8aa1d8e596343",
+                "969208b5dddf888c"
+            ]
+        ]
+    },
+    {
+        "id": "9ab17499a5d5790e",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
