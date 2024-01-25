@@ -4,6 +4,6 @@
 
 The gas sensing code is from kartun83 (github account) and can be found here: https://github.com/kartun83/micropython-MQ/tree/master. The gas sensing MQ codes have been modified so it can be run on a PyCom device. 
 
-I AM CURRENTLY NOT SURE ABOUT THE ACCURACY OF MY SENSOR VALUES AND AM FINDING IT HARD TO CALIBRATE IT. SO, THIS IS JUST A WORK IN PROGRESS.
+I AM CURRENTLY NOT SURE ABOUT THE ACCURACY OF MY SENSOR VALUES AND AM FINDING IT HARD TO CALIBRATE IT. I HAVE LOST THE SPEC SHEET TO THESE SENSORS AND DON'T REALLY REMEMBER WHERE I PROCURED THEM FROM. SO I AM NOT VERY SURE ABOUT ITS INTERNAL RESISTANCE OR IF THE CALIBRATION CURVE OF MY SENSOR MATCHES THAT OF THE SENSOR MENTIONED IN KARTUN83' REPO. SO PPM VALUES ARE MOST PROBABLY ONLY GOOD FOR SELF COMPARISONS (LEVELS RISING / FALLING IN RELATION TO IT OWN PAST VALUES). THIS IS JUST A WORK IN PROGRESS.
 
 I have ported micropython-collections, micropython-requests, micropython-urllib-parse to make a url connection to simplepush.io that sends push notifications to your phone. You need to download install the simplepush app from the app store on your phone to receive notifications.
