@@ -1,4 +1,10 @@
 # main.py -- put your code here!
+# --------------------------------------------------
+# Author: avsg8, (https://github.com/avsg8), 01/2024
+
+from BaseMQ import BaseMQ 
+from micropython import const
+
 from network import WLAN, LTE, LoRa, Bluetooth, Server
 import machine, pycom, socket, uos, time #, ssl
 from umqtt.simple2 import MQTTClient
@@ -60,7 +66,7 @@ print(val)
 temp = machine.temperature()
 pycom.rgbled(0x7f7f00)
 try:
-    pubmsg(server='192.168.86.124', topic='saltlevel', payload= val)
+    pubmsg(server='ipaddress-of-your-nodered-mqtt-server', topic='saltlevel', payload= val) #
 except:
     pass
 print('rgbled lit')
