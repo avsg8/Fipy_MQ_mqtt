@@ -56,23 +56,25 @@ while not wlan.isconnected():
 print("WiFi connected succesfully")
 
 print(wlan.ifconfig())
+
 #--- umqtt testing block ----#
 #s = socket.socket()
 #ss = ssl.wrap_socket(s)
 #ss.connect(socket.getaddrinfo('www.google.com', 443)[0][-1])
 #print(ss)
 # payload = int(uos.urandom(1)[0] / 256*10)
+# temp = machine.temperature() #internal temperature of FiPy. May not be used at all
+# payload = temp
 #---- end testing block -----#
 
 #get CO levels from MQ sensors
 val = App().Run()
 print(val)
-temp = machine.temperature() #internal temperature of FiPy. May not be used at all
 
 # some activity leds to let you know which step you are at
 pycom.rgbled(0x7f7f00)
 try:
-    pubmsg(server='ipaddress-of-your-nodered-mqtt-server', topic='COlevels', payload= val) # connects to a nodered broker on local network
+    pubmsg(server='<ipaddress-of-your-nodered-mqtt-server>', topic='<your-mqtt-topic>', payload= val) # connects to a nodered broker on local network
                                                                                             # look in images folder for code
 except:
     pass
@@ -118,4 +120,6 @@ print("Going to sleep")
 pycom.heartbeat(False)
 pycom.rgbled(0x000000)
 
+# Probably redundant to use machine deepsleep to conserve battery if the code is used to interface with MQ sensors. These sensors need
+# a pre-heat time of few hours to couple of days to stabilize. So, it's does not make sense to power them from battery.
 machine.deepsleep(1000*60)
