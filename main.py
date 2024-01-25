@@ -56,17 +56,24 @@ while not wlan.isconnected():
 print("WiFi connected succesfully")
 
 print(wlan.ifconfig())
+#--- umqtt testing block ----#
 #s = socket.socket()
 #ss = ssl.wrap_socket(s)
 #ss.connect(socket.getaddrinfo('www.google.com', 443)[0][-1])
 #print(ss)
 # payload = int(uos.urandom(1)[0] / 256*10)
+#---- end testing block -----#
+
+#get CO levels from MQ sensors
 val = App().Run()
 print(val)
-temp = machine.temperature()
+temp = machine.temperature() #internal temperature of FiPy. May not be used at all
+
+# some activity leds to let you know which step you are at
 pycom.rgbled(0x7f7f00)
 try:
-    pubmsg(server='ipaddress-of-your-nodered-mqtt-server', topic='saltlevel', payload= val) #
+    pubmsg(server='ipaddress-of-your-nodered-mqtt-server', topic='saltlevel', payload= val) # connects to a nodered broker on local network
+                                                                                            # look in images folder for code
 except:
     pass
 print('rgbled lit')
@@ -80,6 +87,7 @@ except:
 pycom.rgbled(0x00ff00)
 time.sleep(1)
 
+#---- code for simplepush.io (push notifications on your phone) ----#
 if val > 50: #or a set value
     data = urlencode({'key': '<your-simplepush-key-here>', 'title': 'CO level inside', 'msg': 'Check for high CO levels inside', 'event': 'warning'}).encode()
     urlopen("https://api.simplepush.io/send", data= data) #send msg
