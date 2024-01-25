@@ -72,7 +72,7 @@ temp = machine.temperature() #internal temperature of FiPy. May not be used at a
 # some activity leds to let you know which step you are at
 pycom.rgbled(0x7f7f00)
 try:
-    pubmsg(server='ipaddress-of-your-nodered-mqtt-server', topic='saltlevel', payload= val) # connects to a nodered broker on local network
+    pubmsg(server='ipaddress-of-your-nodered-mqtt-server', topic='COlevels', payload= val) # connects to a nodered broker on local network
                                                                                             # look in images folder for code
 except:
     pass
