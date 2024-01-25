@@ -6,7 +6,7 @@ from micropython import const
 
 class MQ7(BaseMQ):
 	## Clean air coefficient
-	MQ7_RO_BASE = 5.65	# tried to vary this so that after calibration it matched with base resistance (assumes the clean air RO is base resistance)
+	MQ7_RO_BASE = 5.65	
 	def __init__(self, pinData, pinHeater=-1,boardResistance = 10, baseVoltage = 5.0, measuringStrategy = BaseMQ.STRATEGY_ACCURATE):
 		# Call superclass to fill attributes
 		#print(self, pinData, pinHeater,boardResistance, baseVoltage, measuringStrategy)

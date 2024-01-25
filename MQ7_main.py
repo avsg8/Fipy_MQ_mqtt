@@ -3,13 +3,14 @@
 from MQ7 import MQ7
 import utime
 
-pin = 'P13' #change to PyCom analog pin# 
-baseVoltage = 5.0 #change to the voltage powering the Sensor
-ro = 5.65 # Lost the spec sheet to my sensor. So,i am navigating blind here. 
-	       # play with the MQ7_RO_BASE value in MQ7.py file and calibrate the sensor by passing ro=-1 in sensor.calibrate() below, 
-	       # so that the base resistance is nearly equal to MQ7_RO_BASE.
+pin = 'P13'
+baseVoltage = 5
+ro = 5.65 # if you want to calibrate it else, supply with values gotten from previous runs
 
 class App:
+	#pin = 'P13'
+	#baseVoltage = 5
+	#ro = 9.654 
 	def __init__(self, pin = pin):
 		self.sensor = MQ7(pinData = pin, baseVoltage = baseVoltage)
 		#self.sensor._ro = 0.7663 #0.2022838 # comment this line for the first run, calibrate and get the value. Then put the value here
