@@ -5,4 +5,5 @@
 The gas sensing code is from kartun83 (github account) and can be found here: https://github.com/kartun83/micropython-MQ/tree/master. The gas sensing MQ codes have been modified so it can be run on a PyCom device. 
 
 I AM CURRENTLY NOT SURE ABOUT THE ACCURACY OF MY SENSOR VALUES AND AM FINDING IT HARD TO CALIBRATE IT. SO, THIS IS JUST A WORK IN PROGRESS.
+
 I have ported micropython-collections, micropython-requests, micropython-urllib-parse to make an url connection to simplepush.io that sends push notifications to your phone. You need to download install the simplepush app from the app store on your phone to receive notifications.
