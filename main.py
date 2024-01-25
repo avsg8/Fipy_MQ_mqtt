@@ -90,7 +90,7 @@ time.sleep(1)
 #---- code for simplepush.io (push notifications on your phone) ----#
 if val > 50: #or a set value
     data = urlencode({'key': '<your-simplepush-key-here>', 'title': 'CO level inside', 'msg': 'Check for high CO levels inside', 'event': 'warning'}).encode()
-    urlopen("https://api.simplepush.io/send", data= data) #send msg
+    urlopen("https://api.simplepush.io/send", data= data) #send msg to your phone
 
 print('Switching off WLAN')
 wlan.deinit()
