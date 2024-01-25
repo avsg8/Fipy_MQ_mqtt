@@ -4,14 +4,14 @@
 
 from BaseMQ import BaseMQ 
 from micropython import const
-
-from network import WLAN, LTE, LoRa, Bluetooth, Server
+from network import WLAN, LTE, LoRa, Bluetooth
 import machine, pycom, socket, uos, time #, ssl
 from umqtt.simple2 import MQTTClient
 from MQ7_main import App
 from parse import urlencode
 from urequest import urlopen
 
+#---------------- deep sleep wake up block ------------------#
 if pycom.lte_modem_en_on_boot():
     print("LTE on boot was enabled. Disabling.")
     pycom.lte_modem_en_on_boot(False)
@@ -32,13 +32,7 @@ elif wake_reason == machine.ULP_WAKE:
 #########
 # machine.pin_sleep_wakeup(('P3', 'P4'), mode=machine.WAKEUP_ANY_HIGH, enable_pull=True)
 
-
-def pubmsg(server="localhost", topic='COlevels', payload=0):
-    c = MQTTClient("umqtt_client", server)
-    c.connect()
-    c.publish(bytes(topic,'utf-8'), bytes(str(payload),'utf-8'))
-    c.disconnect()
-
+#---------------- WiFi connection block ------------------#
 wlan = WLAN(mode=WLAN.STA, antenna=WLAN.EXT_ANT, max_tx_pwr=78)
 
 wlan.connect(ssid='<your-SSID-here>', auth=(WLAN.WPA2, '<your-wifi-pwd>'))
@@ -57,6 +51,12 @@ print("WiFi connected succesfully")
 
 print(wlan.ifconfig())
 
+#---------------- gas sensing block ------------------#
+val = App().Run()
+print(val)
+# some activity leds to let you know which step you are at
+pycom.rgbled(0x7f7f00)
+
 #--- umqtt testing block ----#
 #s = socket.socket()
 #ss = ssl.wrap_socket(s)
@@ -67,12 +67,12 @@ print(wlan.ifconfig())
 # payload = temp
 #---- end testing block -----#
 
-#get CO levels from MQ sensors
-val = App().Run()
-print(val)
-
-# some activity leds to let you know which step you are at
-pycom.rgbled(0x7f7f00)
+#---------------- MQTT block ------------------#
+def pubmsg(server="localhost", topic='COlevels', payload=0):
+    c = MQTTClient("umqtt_client", server)
+    c.connect()
+    c.publish(bytes(topic,'utf-8'), bytes(str(payload),'utf-8'))
+    c.disconnect()
 try:
     pubmsg(server='<ipaddress-of-your-nodered-mqtt-server>', topic='<your-mqtt-topic>', payload= val) # connects to a nodered broker on local network
                                                                                             # look in images folder for code
@@ -80,6 +80,12 @@ except:
     pass
 print('rgbled lit')
 
+#---------------- push notification block (simplepush.io) ------------------#
+if val > 50: #or a set value
+    data = urlencode({'key': '<your-simplepush-key-here>', 'title': 'CO level inside', 'msg': 'Check for high CO levels inside', 'event': 'warning'}).encode()
+    urlopen("https://api.simplepush.io/send", data= data) #send msg to your phone
+
+#---------------- get ready to go into deep sleep block ------------------#
 print('Switching off LTE radio')
 try:
     lte = LTE()
@@ -88,24 +94,13 @@ except:
     pass
 pycom.rgbled(0x00ff00)
 time.sleep(1)
-
-#---- code for simplepush.io (push notifications on your phone) ----#
-if val > 50: #or a set value
-    data = urlencode({'key': '<your-simplepush-key-here>', 'title': 'CO level inside', 'msg': 'Check for high CO levels inside', 'event': 'warning'}).encode()
-    urlopen("https://api.simplepush.io/send", data= data) #send msg to your phone
-
 print('Switching off WLAN')
 wlan.deinit()
 pycom.rgbled(0x0000ff)
 time.sleep(1)
-
 print('Switching off Heartbeat')
 pycom.rgbled(0xff0000)
 time.sleep(1)
-
-#print('Switching off Server')
-#server = Server()
-#server.deinit()
 
 print('Switching off Bluetooth')
 bt = Bluetooth()
